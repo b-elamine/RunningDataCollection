@@ -15,7 +15,6 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import java.io.File;
@@ -77,20 +76,9 @@ public class SensorBackgroundService extends Service implements SensorEventListe
     @Override
     public void onSensorChanged(SensorEvent event) {
         // Write sensor data to CSV file
-        try {
-            if (writer == null) {
-                File file = new File(getExternalFilesDir(null), "sensor_data.csv");
-                writer = new FileWriter(file, true); // append mode
-            }
-            String data = event.timestamp + "," + event.values[0] + "," + event.values[1] + "," + event.values[2] + "\n";
-            writer.write(data);
 
-            // Debugging ..
-            Log.d(TAG, "SensorData: " + data);
+        writeCsv(event,"",0,0,0,0);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -128,6 +116,23 @@ public class SensorBackgroundService extends Service implements SensorEventListe
 
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    private void  writeCsv(SensorEvent event, String id, int age, int height, int weight, int force){
+        try {
+            if (writer == null) {
+                File file = new File(getExternalFilesDir(null), "sensor_data.csv");
+                writer = new FileWriter(file, true); // append mode
+            }
+            String data = event.timestamp + "," + event.values[0] + "," + event.values[1] + "," + event.values[2] + "\n";
+            writer.write(data);
+
+            // Debugging ..
+            Log.d(TAG, "SensorData: " + data);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

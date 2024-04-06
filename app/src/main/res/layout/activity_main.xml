@@ -7,30 +7,115 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="8dp"
+        android:text="Lets collect some data !"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Data here !"
-            android:id="@+id/textview"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="8dp"
-            android:textStyle="italic"
-            android:textSize="16dp"/>
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="8dp"
+        android:text="We'll be collecting some of your motion data using your smartphone's built-in accelerometer and gyroscope sensors. This data will be used solely for scientific research purposes."
+        android:textSize="16dp" />
 
-        <Button
-            android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/editName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn"
-            android:layout_below="@+id/textview"
-            android:text="Start Collection"/>
+            android:layout_marginTop="10dp"
+            android:hint="Full Name" />
+
+        <EditText
+            android:id="@+id/editHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editName"
+            android:layout_marginTop="10dp"
+            android:hint="Height in cm" />
+
+        <EditText
+            android:id="@+id/editWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editHeight"
+            android:layout_marginTop="10dp"
+            android:hint="Weight in kg" />
+
+        <EditText
+            android:id="@+id/editAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editWeight"
+            android:layout_marginTop="10dp"
+            android:hint="Age in years" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:visibility="visible">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Percentage of force"
+            android:id="@+id/editForce"/>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:layout_margin="5dp"
+            android:enabled="true"/>
+        <Button
+            android:id="@+id/btnDone"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:layout_margin="5dp"
+            android:backgroundTint="#2CAA2C"
+            android:enabled="false"/>
+
+
+    </LinearLayout>
+
+
+
+
 
 
 </RelativeLayout>

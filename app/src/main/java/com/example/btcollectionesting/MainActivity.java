@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -14,21 +15,27 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     
-    private Button start;
-    private TextView show;
-
+    private Button next, done;
+    private EditText fName, age, weight, height, force;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        done = (Button) findViewById(R.id.btnDone);
+        next = (Button) findViewById(R.id.btnNext);
         
-        start = (Button) findViewById(R.id.btn);
+        fName = (EditText) findViewById(R.id.editName);
+        age = (EditText) findViewById(R.id.editAge);
+        weight = (EditText) findViewById(R.id.editWeight);
+        height = (EditText) findViewById(R.id.editHeight);
+        force = (EditText) findViewById(R.id.editForce);
 
         Intent serviceIntent;
         serviceIntent = new Intent(this, SensorBackgroundService.class);
 
-        start.setOnClickListener(new View.OnClickListener() {
+        done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startService(serviceIntent);
