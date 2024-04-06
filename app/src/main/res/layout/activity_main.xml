@@ -34,6 +34,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/firstScreen"
         android:layout_centerVertical="true"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
@@ -74,6 +75,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/secondScreen"
         android:layout_centerVertical="true"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
@@ -102,6 +104,13 @@
             android:layout_margin="5dp"
             android:enabled="true"/>
         <Button
+            android:id="@+id/btnBack"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_margin="5dp"
+            android:visibility="gone"/>
+        <Button
             android:id="@+id/btnDone"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
@@ -109,6 +118,16 @@
             android:layout_margin="5dp"
             android:backgroundTint="#2CAA2C"
             android:enabled="false"/>
+
+        <Button
+            android:id="@+id/btnStop"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Stop"
+            android:layout_margin="5dp"
+            android:backgroundTint="#FF0000"
+            android:enabled="false"
+            android:visibility="gone"/>
 
 
     </LinearLayout>
