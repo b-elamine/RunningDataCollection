@@ -3,7 +3,9 @@ package com.example.btcollectionesting;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,10 +19,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    
+
     private Button next, back, done, stop;
     private EditText fName, age, weight, height, force;
     private RelativeLayout firstScreen, secondScreen;
+    private TextView counter;
+    private CountDownTimer countDownTimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         firstScreen = (RelativeLayout) findViewById(R.id.firstScreen);
         secondScreen = (RelativeLayout) findViewById(R.id.secondScreen);
+
+        counter = (TextView) findViewById(R.id.counter);
 
         Intent serviceIntent;
         serviceIntent = new Intent(this, SensorBackgroundService.class);
@@ -75,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
                 // sending data to the service by intent
                 String s_force = force.getText().toString();
                 serviceIntent.putExtra("force", s_force);
@@ -84,11 +88,18 @@ public class MainActivity extends AppCompatActivity {
                 // Disable the second screen so we get count down to start collecting data
                 secondScreen.setVisibility(View.GONE);
 
-                    /* Here some logic for the count down, then show the user that
-                        we are collecting For better user experience */
+                // Setting the counter visible
+                counter.setVisibility(View.VISIBLE);
+
+                // Setting stop button to visible
+                stop.setVisibility(View.VISIBLE);
+                back.setEnabled(false);
+                done.setVisibility(View.GONE);
+
 
                 // After the count down we start the service and collect our data as needed
-                startService(serviceIntent);
+                startServiceWithCountDown(serviceIntent, 10000);
+
             }
         });
 
@@ -96,6 +107,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Here we will stop collecting the data and go back to the first screen
+                stopService(serviceIntent);
+
+                // go back to enter percentage of force
+                secondScreen.setVisibility(View.VISIBLE);
+                counter.setVisibility(View.GONE);
+                stop.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
+                back.setEnabled(true);
+
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Showing the next button and hide the back button
+                next.setVisibility(View.VISIBLE);
+                back.setVisibility(View.GONE);
+
+                // Passing back to the first screen to re-enter user's data
+                firstScreen.setVisibility(View.VISIBLE);
+                secondScreen.setVisibility(View.GONE);
+
+                // Disable the Done button
+                done.setEnabled(false);
 
             }
         });
@@ -118,4 +155,33 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    private void startServiceWithCountDown(Intent serviceIntent, int duration){
+        countDownTimer = new CountDownTimer(duration, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long seconds = millisUntilFinished / 1000;
+                counter.setText(String.valueOf(seconds));
+            }
+            @Override
+            public void onFinish() {
+                counter.setText("Run");
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    startForegroundService(serviceIntent);
+                    stop.setEnabled(true);
+                }
+            }
+        };
+        countDownTimer.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Cancel the countdown timer to prevent memory leaks
+        if (countDownTimer != null){
+            countDownTimer.cancel();
+        }
+    }
+
 }

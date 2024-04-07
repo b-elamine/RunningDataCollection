@@ -45,7 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="Full Name" />
+            android:hint="Full Name"
+            android:inputType="textCapWords"/>
 
         <EditText
             android:id="@+id/editHeight"
@@ -53,7 +54,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/editName"
             android:layout_marginTop="10dp"
-            android:hint="Height in cm" />
+            android:hint="Height in cm"
+            android:inputType="number"
+            android:maxLength="3"/>
 
         <EditText
             android:id="@+id/editWeight"
@@ -61,7 +64,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/editHeight"
             android:layout_marginTop="10dp"
-            android:hint="Weight in kg" />
+            android:hint="Weight in kg"
+            android:inputType="number"
+            android:maxLength="3"/>
 
         <EditText
             android:id="@+id/editAge"
@@ -69,7 +74,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/editWeight"
             android:layout_marginTop="10dp"
-            android:hint="Age in years" />
+            android:hint="Age in years"
+            android:inputType="number"
+            android:maxLength="3"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -85,9 +92,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Percentage of force"
-            android:id="@+id/editForce"/>
+            android:id="@+id/editForce"
+            android:inputType="number"
+            android:maxLength="3"/>
+        
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/counter"
+        android:text="10"
+        android:textSize="80dp"
+        android:textStyle="bold"
+        android:fontFamily="casual"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -127,7 +149,7 @@
             android:layout_margin="5dp"
             android:backgroundTint="#FF0000"
             android:enabled="false"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
 
     </LinearLayout>

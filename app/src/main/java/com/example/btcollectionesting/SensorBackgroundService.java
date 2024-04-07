@@ -45,8 +45,7 @@ public class SensorBackgroundService extends Service implements SensorEventListe
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        /*
-        Testing extra data if received
+        //Testing extra data if received
 
         if (intent != null) {
             String extraData = intent.getStringExtra("name");
@@ -56,7 +55,6 @@ public class SensorBackgroundService extends Service implements SensorEventListe
             }
         }
 
-        */
 
 
         if (sensor != null) {
