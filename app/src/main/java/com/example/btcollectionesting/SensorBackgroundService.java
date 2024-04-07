@@ -44,6 +44,21 @@ public class SensorBackgroundService extends Service implements SensorEventListe
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        /*
+        Testing extra data if received
+
+        if (intent != null) {
+            String extraData = intent.getStringExtra("name");
+            if (extraData != null) {
+                // Do something with the extra data
+                Log.d(TAG, "Received extra data: " + extraData);
+            }
+        }
+
+        */
+
+
         if (sensor != null) {
             sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
         } else {
@@ -53,6 +68,8 @@ public class SensorBackgroundService extends Service implements SensorEventListe
         // Create and show a notification for the foreground service
         Notification notification = createNotification();
         startForeground(NOTIFICATION_ID, notification);
+
+
 
         return START_STICKY;
     }
@@ -77,7 +94,7 @@ public class SensorBackgroundService extends Service implements SensorEventListe
     public void onSensorChanged(SensorEvent event) {
         // Write sensor data to CSV file
 
-        writeCsv(event,"",0,0,0,0);
+       // writeCsv(event,"",0,0,0,0);
 
     }
 
@@ -119,13 +136,17 @@ public class SensorBackgroundService extends Service implements SensorEventListe
         }
     }
 
-    private void  writeCsv(SensorEvent event, String id, int age, int height, int weight, int force){
+    private void  writeCsv(SensorEvent event, String name, int age, int height, int weight, int force){
+
+        String file_name = name+String.valueOf((height*weight)/10);
+
         try {
             if (writer == null) {
-                File file = new File(getExternalFilesDir(null), "sensor_data.csv");
+                File file = new File(getExternalFilesDir(null), file_name+".csv");
                 writer = new FileWriter(file, true); // append mode
             }
-            String data = event.timestamp + "," + event.values[0] + "," + event.values[1] + "," + event.values[2] + "\n";
+            String data = name + "," + event.timestamp + "," + event.values[0] + "," + event.values[1]
+                    + "," + event.values[2] + "," + height + "," + weight + "," + age + "," + force + "\n";
             writer.write(data);
 
             // Debugging ..

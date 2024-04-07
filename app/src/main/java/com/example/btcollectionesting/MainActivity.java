@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         we are collecting For better user experience */
 
                 // After the count down we start the service and collect our data as needed
-                /* startService(serviceIntent); */
+                startService(serviceIntent);
             }
         });
 

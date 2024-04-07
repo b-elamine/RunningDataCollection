@@ -38,7 +38,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <EditText
             android:id="@+id/editName"
@@ -79,7 +79,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <EditText
             android:layout_width="match_parent"
