@@ -30,6 +30,8 @@ public class SensorBackgroundService extends Service implements SensorEventListe
     private Sensor sensor;
     private FileWriter writer;
     private PowerManager.WakeLock wakeLock;
+    private Intent mIntent;
+
 
     @Override
     public void onCreate() {
@@ -44,6 +46,8 @@ public class SensorBackgroundService extends Service implements SensorEventListe
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        mIntent = intent; // Storing the intent received in onStartCommand
 
         //Testing extra data if received
 
@@ -90,9 +94,9 @@ public class SensorBackgroundService extends Service implements SensorEventListe
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        // Write sensor data to CSV file
 
-       // writeCsv(event,"",0,0,0,0);
+        // Write sensor data to CSV file
+        writeCsv(event, mIntent);
 
     }
 
@@ -134,7 +138,14 @@ public class SensorBackgroundService extends Service implements SensorEventListe
         }
     }
 
-    private void  writeCsv(SensorEvent event, String name, int age, int height, int weight, int force){
+    private void  writeCsv(SensorEvent event, Intent intent){
+
+        // Getting data from intent's extras
+        String name = intent.getStringExtra("name");
+        int age = Integer.valueOf(intent.getStringExtra("age"));
+        int height = Integer.valueOf(intent.getStringExtra("height"));
+        int weight = Integer.valueOf(intent.getStringExtra("weight"));
+        String force = intent.getStringExtra("force");
 
         String file_name = name+String.valueOf((height*weight)/10);
 
@@ -154,4 +165,5 @@ public class SensorBackgroundService extends Service implements SensorEventListe
             e.printStackTrace();
         }
     }
+
 }
