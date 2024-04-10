@@ -1,4 +1,4 @@
-package com.example.btcollectionesting;
+package com.example.runnersDataCollection;
 
 import android.app.Notification;
 import android.app.NotificationChannel;

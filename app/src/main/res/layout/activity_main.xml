@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.example.runnersDataCollection.MainActivity">
 
     <TextView
         android:id="@+id/title"
@@ -28,8 +28,16 @@
         android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="8dp"
-        android:text="We'll be collecting some of your motion data using your smartphone's built-in accelerometer and gyroscope sensors. This data will be used solely for scientific research purposes."
-        android:textSize="16dp" />
+        android:text="@string/header"
+        android:textSize="16dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/path_file"
+        android:layout_below="@+id/desc"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"

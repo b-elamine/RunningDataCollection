@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "bTCollectionesting"
+rootProject.name = "runnersDataCollection"
 include(":app")

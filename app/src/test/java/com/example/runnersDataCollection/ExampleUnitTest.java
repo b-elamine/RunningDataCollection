@@ -1,4 +1,4 @@
-package com.example.btcollectionesting;
+package com.example.runnersDataCollection;
 
 import org.junit.Test;
 

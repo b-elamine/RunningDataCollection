@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">bTCollectionesting</string>
+    <string name="app_name">runnersDataCollection</string>
+    <string name="header">We\'ll be collecting some of your motion data using your smartphone\'s built-in accelerometer and gyroscope sensors. This data will be used solely for scientific research purposes.</string>
+    <string name="path_file">
+            Output data stored in Android --> Data : \"com.example.runnersDataCollection\"
+    </string>
 </resources>

@@ -16,19 +16,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BTCollectionesting"
+        android:theme="@style/Theme.runnersDataCollection"
         tools:targetApi="31">
         <service
-            android:name=".SensorBackgroundService"
+            android:name="com.example.runnersDataCollection.SensorBackgroundService"
             android:foregroundServiceType="dataSync|location"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false"
+            tools:ignore="ForegroundServicePermission">
             <intent-filter>
-                <action android:name="com.example.btcollectionesting.SensorBackgroundService" />
+                <action android:name="com.runnersDataCollection.SensorBackgroundService" />
             </intent-filter>
         </service>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.runnersDataCollection.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.btcollectionesting;
+package com.example.runnersDataCollection;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.btcollectionesting.R;
 
 public class MainActivity extends AppCompatActivity {
 
