@@ -41,13 +41,12 @@ The app requires the following permissions to function properly:
 
 - **BODY_SENSORS:** Allows the app to access accelerometer sensor data.
 
-## Why these permissions are required:
+- **BODY_SENSORS_BACKGROUND:** (Missing from the previous list) Allows the app to access sensor data in the background, even when the app is not in the foreground.
 
-- **WAKE_LOCK:** The app needs to acquire wake locks to ensure continuous operation of its background service, even when the device screen is turned off. This ensures uninterrupted packet capture functionality.
+- **BODY_SENSORS_BACKGROUND_LOCATION:** (Missing from the previous list) Allows the app to access sensor data in the background, including the device's location.
 
-- **WRITE_EXTERNAL_STORAGE:** The app needs permission to write sensor data to the external storage of the device. This is necessary for storing captured packet data for later analysis or logging.
+- **FOREGROUND_SERVICE:** (Missing from the previous list) Allows the app to run foreground services, which are services that the user is actively aware of and cannot be killed by the system.
 
-- **BODY_SENSORS:** This permission allows the app to access accelerometer sensor data, which may be used for certain packet capture functionalities or analysis purposes.
+- **FOREGROUND_SERVICE_LOCATION:** (Missing from the previous list) Allows the app to access the device's location while running foreground services.
 
-By granting these permissions, you enable the app to provide its intended functionality effectively. Rest assured that the app respects your privacy and does not misuse the data collected.
-
+- **FOREGROUND_SERVICE_SPECIAL_USE:** (Missing from the previous list) Allows the app to use special foreground services, which may have elevated priority or access rights.
