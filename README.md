@@ -18,7 +18,7 @@ This Android project demonstrates how to create a foreground service that listen
 1. Clone this repository to your local machine:
 
     ```
-    git clone https://github.com/your-username/btcollectionesting.git
+    git clone https://github.com/b-elamine/RunningDataCollection.git
     ```
 
 2. Open the project in Android Studio.
@@ -31,10 +31,17 @@ This Android project demonstrates how to create a foreground service that listen
 - The service will continuously listen to accelerometer sensor data and save it to a CSV file named "sensor_data.csv" in the app's external files directory.
 - You can modify the service behavior or add additional sensor listeners as needed in the `SensorForegroundService.java` file.
 
-## Permissions
+# App Permissions
 
-The app requires the following permissions:
+The app requires the following permissions to function properly:
 
-- `WAKE_LOCK`: Allows the app to acquire wake locks to ensure the service continues running even when the screen is off.
-- `WRITE_EXTERNAL_STORAGE`: Allows the app to write sensor data to external storage.
-- `BODY_SENSORS`: Allows the app to access accelerometer sensor data.
+- **WAKE_LOCK:** Allows the app to acquire wake locks to ensure the service continues running even when the screen is off.
+
+- **WRITE_EXTERNAL_STORAGE:** Allows the app to write sensor data to external storage.
+
+- **BODY_SENSORS:** Allows the app to access accelerometer sensor data.
+
+- **BODY_SENSORS_BACKGROUND:** Allows the app to access sensor data in the background, even when the app is not in the foreground.
+
+- **FOREGROUND_SERVICE:** Allows the app to run foreground services, which are services that the user is actively aware of and cannot be killed by the system.
+
