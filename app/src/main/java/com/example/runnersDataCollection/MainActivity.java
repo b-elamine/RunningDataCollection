@@ -3,6 +3,7 @@ package com.example.runnersDataCollection;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+        SharedPreferences sp = getSharedPreferences("Current User", MainActivity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
         done = (Button) findViewById(R.id.btnDone);
         next = (Button) findViewById(R.id.btnNext);
         stop = (Button) findViewById(R.id.btnStop);
@@ -63,15 +67,21 @@ public class MainActivity extends AppCompatActivity {
                 next.setVisibility(View.GONE);
                 back.setVisibility(View.VISIBLE);
 
-                // Getting strings from editTexts and sending them to the service by intent
+                // Getting strings from editText in intent extras and shared preferences
                 String s_name = fName.getText().toString();
                 serviceIntent.putExtra("name", s_name);
+                editor.putString("name", s_name);
                 String s_age = age.getText().toString();
                 serviceIntent.putExtra("age", s_age);
+                editor.putString("age", s_age);
                 String s_height = height.getText().toString();
                 serviceIntent.putExtra("height", s_height);
+                editor.putString("height", s_height);
                 String s_weight = weight.getText().toString();
                 serviceIntent.putExtra("weight", s_weight);
+                editor.putString("weight", s_weight);
+
+                editor.commit();
 
                 // Passing to the second screen to enter the percentage of the force
                 firstScreen.setVisibility(View.GONE);
@@ -89,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
                 // sending data to the service by intent
                 String s_force = force.getText().toString();
                 serviceIntent.putExtra("force", s_force);
+                editor.putString("force",s_force);
+                editor.commit();
 
                 // Disable the second screen so we get count down to start collecting data
                 secondScreen.setVisibility(View.GONE);
@@ -96,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
                 // Setting the counter visible
                 counter.setVisibility(View.VISIBLE);
 
-                // Setting stop button to visible
                 stop.setVisibility(View.VISIBLE);
+                stop.setEnabled(false);
                 back.setEnabled(false);
                 done.setVisibility(View.GONE);
 
@@ -127,6 +139,15 @@ public class MainActivity extends AppCompatActivity {
             stop.setEnabled(true);
             back.setEnabled(false);
             done.setVisibility(View.GONE);
+
+            // if the app is killed we get the user's data saved as shared preferences
+            serviceIntent.putExtra("name", sp.getString("name", "-1"));
+            serviceIntent.putExtra("age", sp.getString("age", "-1"));
+            serviceIntent.putExtra("height", sp.getString("height", "-1"));
+            serviceIntent.putExtra("weight", sp.getString("weight", "-1"));
+            serviceIntent.putExtra("force", sp.getString("force", "-1"));
+
+
         }
 
         stop.setOnClickListener(new View.OnClickListener() {
@@ -142,10 +163,6 @@ public class MainActivity extends AppCompatActivity {
                 done.setVisibility(View.VISIBLE);
                 done.setEnabled(true);
                 back.setEnabled(true);
-
-                // Clear the percentage of force when done collecting
-                force.getText().clear();
-
 
             }
         });
@@ -164,12 +181,6 @@ public class MainActivity extends AppCompatActivity {
 
                 // Disable the Done button
                 done.setEnabled(false);
-
-                // Clear the editTexts when going back
-                fName.getText().clear();
-                height.getText().clear();
-                weight.getText().clear();
-                age.getText().clear();
 
             }
         });
