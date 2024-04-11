@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.btcollectionesting"
+    namespace = "com.example.runnersDataCollection"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.btcollectionesting"
+        applicationId = "com.example.runnersDataCollection"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

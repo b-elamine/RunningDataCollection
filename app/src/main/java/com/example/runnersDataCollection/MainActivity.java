@@ -18,7 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.btcollectionesting.R;
+import com.example.runnersDataCollection.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -100,10 +100,31 @@ public class MainActivity extends AppCompatActivity {
 
 
                 // After the count down we start the service and collect our data as needed
-                startServiceWithCountDown(serviceIntent, 10000);
+                startServiceWithCountDown(serviceIntent, 5000);
 
             }
         });
+
+        if (isDataCollectionRunning(SensorBackgroundService.class)){
+
+            firstScreen.setVisibility(View.GONE);
+            next.setVisibility(View.GONE);
+            back.setVisibility(View.VISIBLE);
+
+
+            // Disable the second screen so we get count down to start collecting data
+            secondScreen.setVisibility(View.GONE);
+
+            // Setting the counter visible
+            counter.setVisibility(View.VISIBLE);
+            counter.setText("Run");
+
+            // Setting stop button to visible
+            stop.setVisibility(View.VISIBLE);
+            stop.setEnabled(true);
+            back.setEnabled(false);
+            done.setVisibility(View.GONE);
+        }
 
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +138,10 @@ public class MainActivity extends AppCompatActivity {
                 stop.setVisibility(View.GONE);
                 done.setVisibility(View.VISIBLE);
                 back.setEnabled(true);
+
+                // Clear the percentage of force when done collecting
+                force.getText().clear();
+
 
             }
         });
@@ -135,6 +160,12 @@ public class MainActivity extends AppCompatActivity {
 
                 // Disable the Done button
                 done.setEnabled(false);
+
+                // Clear the editTexts when going back
+                fName.getText().clear();
+                height.getText().clear();
+                weight.getText().clear();
+                age.getText().clear();
 
             }
         });

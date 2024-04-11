@@ -3,6 +3,7 @@ package com.example.runnersDataCollection;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -115,11 +116,18 @@ public class SensorBackgroundService extends Service implements SensorEventListe
         // Create a notification channel for Android Oreo and above
         createNotificationChannel();
 
+        // Create an intent to launch your app's main activity
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         // Create the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Sensor Service")
                 .setContentText("Running")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent); // Set the PendingIntent to launch the app's main activity
 
         return builder.build();
     }
