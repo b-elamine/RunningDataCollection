@@ -18,7 +18,7 @@ This Android project demonstrates how to create a foreground service that listen
 1. Clone this repository to your local machine:
 
     ```
-    git clone https://github.com/your-username/btcollectionesting.git
+    git clone [https://github.com/your-username/btcollectionesting.git](https://github.com/b-elamine/RunningDataCollection)
     ```
 
 2. Open the project in Android Studio.
