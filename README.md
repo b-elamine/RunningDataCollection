@@ -41,12 +41,11 @@ The app requires the following permissions to function properly:
 
 - **BODY_SENSORS:** Allows the app to access accelerometer sensor data.
 
-- **BODY_SENSORS_BACKGROUND:** (Missing from the previous list) Allows the app to access sensor data in the background, even when the app is not in the foreground.
+- **BODY_SENSORS_BACKGROUND:** Allows the app to access sensor data in the background, even when the app is not in the foreground.
 
-- **BODY_SENSORS_BACKGROUND_LOCATION:** (Missing from the previous list) Allows the app to access sensor data in the background, including the device's location.
+- **BODY_SENSORS_BACKGROUND_LOCATION:** Allows the app to access sensor data in the background, including the device's location.
 
-- **FOREGROUND_SERVICE:** (Missing from the previous list) Allows the app to run foreground services, which are services that the user is actively aware of and cannot be killed by the system.
+- **FOREGROUND_SERVICE:** Allows the app to run foreground services, which are services that the user is actively aware of and cannot be killed by the system.
 
-- **FOREGROUND_SERVICE_LOCATION:** (Missing from the previous list) Allows the app to access the device's location while running foreground services.
+- **FOREGROUND_SERVICE_LOCATION:** Allows the app to access the device's location while running foreground services.
 
-- **FOREGROUND_SERVICE_SPECIAL_USE:** (Missing from the previous list) Allows the app to use special foreground services, which may have elevated priority or access rights.
