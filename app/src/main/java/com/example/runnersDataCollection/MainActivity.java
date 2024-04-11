@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 counter.setVisibility(View.GONE);
                 stop.setVisibility(View.GONE);
                 done.setVisibility(View.VISIBLE);
+                done.setEnabled(true);
                 back.setEnabled(true);
 
                 // Clear the percentage of force when done collecting
