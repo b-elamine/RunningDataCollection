@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 // After the count down we start the service and collect our data as needed
-                startServiceWithCountDown(serviceIntent, 5000);
+                startServiceWithCountDown(serviceIntent, 6000);
 
             }
         });

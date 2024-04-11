@@ -124,9 +124,10 @@ public class SensorBackgroundService extends Service implements SensorEventListe
 
         // Create the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Sensor Service")
-                .setContentText("Running")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentTitle("Data collection activated")
+                .setContentText("You should be running not looking at this !")
+                .setSmallIcon(R.drawable.notif_service_icon)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent); // Set the PendingIntent to launch the app's main activity
 
         return builder.build();
