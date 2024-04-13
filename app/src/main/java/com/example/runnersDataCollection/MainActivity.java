@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private Button next, back, done, stop;
     private EditText fName, age, weight, height, force;
     private RelativeLayout firstScreen, secondScreen;
-    private TextView counter;
+    private TextView counter, chrono;
     private CountDownTimer countDownTimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         secondScreen = (RelativeLayout) findViewById(R.id.secondScreen);
 
         counter = (TextView) findViewById(R.id.counter);
+        chrono = (TextView) findViewById(R.id.chrono);
+
 
         Intent serviceIntent;
         serviceIntent = new Intent(this, SensorBackgroundService.class);
@@ -108,9 +111,9 @@ public class MainActivity extends AppCompatActivity {
                 // Setting the counter visible
                 counter.setVisibility(View.VISIBLE);
 
-                stop.setVisibility(View.VISIBLE);
-                stop.setEnabled(false);
-                back.setEnabled(false);
+               // stop.setVisibility(View.VISIBLE);
+               // stop.setEnabled(false);
+                back.setVisibility(View.GONE);
                 done.setVisibility(View.GONE);
 
 
@@ -135,8 +138,8 @@ public class MainActivity extends AppCompatActivity {
             counter.setText("Run");
 
             // Setting stop button to visible
-            stop.setVisibility(View.VISIBLE);
-            stop.setEnabled(true);
+            //stop.setVisibility(View.VISIBLE);
+            //stop.setEnabled(true);
             back.setEnabled(false);
             done.setVisibility(View.GONE);
 
@@ -150,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        stop.setOnClickListener(new View.OnClickListener() {
+       /* stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Here we will stop collecting the data and go back to the first screen
@@ -165,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                 back.setEnabled(true);
 
             }
-        });
+        });*/
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,6 +212,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 long seconds = millisUntilFinished / 1000;
+                if (seconds==1) {
+                    counter.setText("RUN");
+                }
                 counter.setText(String.valueOf(seconds));
             }
             @Override
@@ -216,9 +222,37 @@ public class MainActivity extends AppCompatActivity {
                 counter.setText("Run");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     startForegroundService(serviceIntent);
-                    stop.setEnabled(true);
                 }
+                counter.setVisibility(View.GONE);
+
+                new Handler().postDelayed(new Runnable() {
+                    int remainingSeconds = 30;
+
+                    @Override
+                    public void run() {
+                        counter.setVisibility(View.GONE);
+                        chrono.setVisibility(View.VISIBLE);
+                        remainingSeconds--;
+                        chrono.setText("Time Remaining: 00:" + remainingSeconds);
+
+                        if (remainingSeconds > 0) {
+                            // Continue countdown
+                            new Handler().postDelayed(this, 1000);
+                        } else {
+                            // Stop service and update UI
+                            stopService(serviceIntent);
+                            secondScreen.setVisibility(View.VISIBLE);
+                            counter.setVisibility(View.GONE);
+                            done.setVisibility(View.VISIBLE);
+                            done.setEnabled(true);
+                            back.setVisibility(View.VISIBLE);
+                            back.setEnabled(true);
+                            chrono.setVisibility(View.GONE);
+                        }
+                    }
+                }, 1000);
             }
+
         };
         countDownTimer.start();
     }
